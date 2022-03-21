@@ -1,47 +1,46 @@
 #include "main.h"
 
 /**
- *  * print_times_table - prints the n times table, starting with 0
- *   * @n: number of the times table
- *    */
-void print_times_table(int n)
+ * _atoi - converts a string to an integer
+ * @s: string to be converted
+ *
+ * Return: the int converted from the string
+ */
+int _atoi(char *s)
 {
-		int i, j, k;
+	int i, d, n, len, f, digit;
 
-			if (n >= 0 && n <= 15)
-					{
-								for (i = 0; i <= n; i++)
-											{
-															for (j = 0; j <= n; j++)
-																			{
-																								k = j * i;
-																												if (j == 0)
-																																	{
-																																							_putchar(k + '0');
-																																											} else if (k < 10 && j != 0)
-																																																{
-																																																						_putchar(',');
-																																																											_putchar(' ');
-																																																																_putchar(' ');
-																																																																					_putchar(' ');
-																																																																										_putchar(k + '0');
-																																																																														} else if (k >= 10 && k < 100)
-																																																																																			{
-																																																																																									_putchar(',');
-																																																																																														_putchar(' ');
-																																																																																																			_putchar(' ');
-																																																																																																								_putchar((k / 10) + '0');
-																																																																																																													_putchar((k % 10) + '0');
-																																																																																																																	} else if (k >= 100)
-																																																																																																																						{
-																																																																																																																												_putchar(',');
-																																																																																																																																	_putchar(' ');
-																																																																																																																																						_putchar((k / 100) + '0');
-																																																																																																																																											_putchar(((k / 10) % 10) + '0');
-																																																																																																																																																_putchar((k % 10) + '0');
-																																																																																																																																																				}
-																																																																																																																				}
-																		_putchar('\n');
-																				}
-									}
+	i = 0;
+	d = 0;
+	n = 0;
+	len = 0;
+	f = 0;
+	digit = 0;
+
+	while (s[len] != '\0')
+		len++;
+
+	while (i < len && f == 0)
+	{
+		if (s[i] == '-')
+			++d;
+
+		if (s[i] >= '0' && s[i] <= '9')
+		{
+			digit = s[i] - '0';
+			if (d % 2)
+				digit = -digit;
+			n = n * 10 + digit;
+			f = 1;
+			if (s[i + 1] < '0' || s[i + 1] > '9')
+				break;
+			f = 0;
+		}
+		i++;
+	}
+
+	if (f == 0)
+		return (0);
+
+	return (n);
 }
